@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskDetails</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body class=taskDetails>
+    <header>
+        <h1>TaskTracker</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Task details</h2>
+            <div class="form-group">
+                <label for="task-title">Task title</label>
+                <input type="text" id="task-title" value="Redesign Dashboard Interface">
+            </div>
+            <div class="form-group">
+                <label for="task-desc">Description</label>
+                <textarea id="task-desc">Redesign the main dashboard interface to improve user experience and incorporate new analytics features. Focus on modern design principles and ensure mobile responsiveness.</textarea>
+            </div>
+            <div class="form-group">
+                <label for="task-date">Deadline</label>
+                <input type="date" id="task-date" value="2025-01-15">
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <div class="priority-buttons">
+                    <button class="high priority-disabled">High</button>
+                    <button class="medium priority-disabled">Medium</button>
+                    <button class="low">Low</button>
+                </div>
+            </div>
+            <div class="subtasks">
+                <h3>Subtasks</h3>
+                <label><input type="checkbox">Research current dashboard patterns</label>               
+                <label><input type="checkbox"> Create wireframes</label>
+                <label><input type="checkbox"> Design UI components</label>
+            </div>
+            <div class="buttons">
+                <button class="delete">Delete</button>
+                <button class="save">Save</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

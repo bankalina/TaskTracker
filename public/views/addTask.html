@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddTask</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+
+<body class="addTask">
+    <header>
+        <h1>TaskTracker</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Add new task</h2>
+            <div class="form-group">
+                <label for="task-title">Task title</label>
+                <input type="text" id="task-title" placeholder="Enter the title of the task">
+            </div>
+            <div class="form-group">
+                <label for="task-desc">Description</label>
+                <textarea id="task-desc" placeholder="Enter a description of the task"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="task-date">Deadline</label>
+                <input type="date" id="task-date">
+            </div>
+            <div class="form-group">
+                <label>Priority</label>
+                <div class="priority-buttons">
+                    <button class="high priority-disabled">High</button>
+                    <button class="medium">Medium</button>
+                    <button class="low priority-disabled" disabled>Low</button>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="delete">Delete</button>
+                <button class="save">Save</button>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
