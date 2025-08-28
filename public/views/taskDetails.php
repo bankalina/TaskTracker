@@ -4,36 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AddTask</title>
-    <link rel="stylesheet" href="../styles/styles.css">
+    <title>TaskDetails</title>
+    <link rel="stylesheet" href="public/styles/styles.css">
 </head>
 
-<body class="addTask">
+<body class=taskDetails>
     <header>
         <h1>TaskTracker</h1>
     </header>
     <main>
         <div class="container">
-            <h2>Add new task</h2>
+            <h2>Task details</h2>
             <div class="form-group">
                 <label for="task-title">Task title</label>
-                <input type="text" id="task-title" placeholder="Enter the title of the task">
+                <input type="text" id="task-title" value="Redesign Dashboard Interface">
             </div>
             <div class="form-group">
                 <label for="task-desc">Description</label>
-                <textarea id="task-desc" placeholder="Enter a description of the task"></textarea>
+                <textarea id="task-desc">Redesign the main dashboard interface to improve user experience and incorporate new analytics features. Focus on modern design principles and ensure mobile responsiveness.</textarea>
             </div>
             <div class="form-group">
                 <label for="task-date">Deadline</label>
-                <input type="date" id="task-date">
+                <input type="date" id="task-date" value="2025-01-15">
             </div>
             <div class="form-group">
                 <label>Priority</label>
                 <div class="priority-buttons">
                     <button class="high priority-disabled">High</button>
-                    <button class="medium">Medium</button>
-                    <button class="low priority-disabled" disabled>Low</button>
+                    <button class="medium priority-disabled">Medium</button>
+                    <button class="low">Low</button>
                 </div>
+            </div>
+            <div class="subtasks">
+                <h3>Subtasks</h3>
+                <label><input type="checkbox">Research current dashboard patterns</label>               
+                <label><input type="checkbox"> Create wireframes</label>
+                <label><input type="checkbox"> Design UI components</label>
             </div>
             <div class="buttons">
                 <button class="delete">Delete</button>

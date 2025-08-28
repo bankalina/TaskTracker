@@ -6,7 +6,8 @@ body {
     font-family: Calibri, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background: linear-gradient(135deg, #fafcff 0%, #f5f9ff 50%, #faf8ff 100%);
+    min-height: 100vh;
 }
 
 header {
@@ -17,12 +18,13 @@ header {
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     color: #0f78e9e4;
+    border-radius: 0 0 12px 12px;
 }
 
 .low, .medium, .high, .delete, .save {
     color: white;
     font-weight: bold;
-    border-radius: 6%;
+    border-radius: 12px;
     border: none;
 }
 
@@ -79,14 +81,14 @@ header {
 		background: white;
 		padding: 15px;
 		margin-bottom: 10px;
-		border-radius: 5px;
+		border-radius: 12px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
 	.tag {
 		display: inline-block;
 		padding: 5px 10px;
-		border-radius: 4px;
+		border-radius: 12px;
 		color: white;
 		font-size: 12px;
 	}
@@ -147,7 +149,7 @@ header {
 		margin: 20px auto;
 		background: white;
 		padding: 20px;
-		border-radius: 10px;
+		border-radius: 12px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
@@ -166,7 +168,7 @@ header {
 		padding: 10px;
 		margin-top: 5px;
 		border: 1px solid #ccc;
-		border-radius: 5px;
+		border-radius: 12px;
 	}
 
 	.priority-buttons {
@@ -178,7 +180,7 @@ header {
 		flex: 1;
 		padding: 10px;
 		border: none;
-		border-radius: 5px;
+		border-radius: 12px;
 		cursor: pointer;
 	}
 
@@ -201,7 +203,7 @@ header {
         margin: 20px auto;
         background: white;
         padding: 20px;
-        border-radius: 10px;
+        border-radius: 12px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
@@ -219,7 +221,7 @@ header {
         padding: 10px;
         margin-top: 5px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 12px;
     }
 
     .priority-buttons {
@@ -231,7 +233,7 @@ header {
         flex: 1;
         padding: 10px;
         border: none;
-        border-radius: 5px;
+        border-radius: 12px;
         cursor: pointer;
     }
 
@@ -258,7 +260,7 @@ header {
         align-items: center;
         gap: 10px;
         padding: 12px;
-        border-radius: 8px;
+        border-radius: 12px;
         width: 100%;
         justify-content: start;
     }
@@ -271,5 +273,468 @@ header {
         .container {
             width: 90%;
         }
+    }
+}
+
+/* Login Page Styles */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(156, 39, 176, 0.1) 100%);
+    padding: 20px;
+}
+
+
+
+.login-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(33, 150, 243, 0.08);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    border: 1px solid rgba(33, 150, 243, 0.08);
+}
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.checkmark-icon {
+    background: linear-gradient(135deg, #2196F3 0%, #9c27b0 100%);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.brand-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.welcome-text {
+    color: #718096;
+    font-size: 16px;
+    margin: 0;
+}
+
+.login-form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.form-group input:focus ~ .input-icon,
+.form-group input:hover ~ .input-icon {
+    color: #2196F3;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:hover {
+    border-color: #cbd5e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #a0aec0;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #2d3748;
+    font-size: 14px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
+    background: #2196F3;
+    border-color: #2196F3;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.forgot-password {
+    color: #2196F3;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #1976d2;
+}
+
+.signin-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #2196F3 0%, #9c27b0 100%);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 25px;
+}
+
+.signin-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(33, 150, 243, 0.3);
+}
+
+.social-login {
+    margin-bottom: 25px;
+}
+
+.divider {
+    position: relative;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background: white;
+    color: #2d3748;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.06), transparent);
+    transition: left 0.5s;
+}
+
+.social-btn:hover::before {
+    left: 100%;
+}
+
+.social-btn:hover {
+    border-color: #2196F3;
+    background: #fafcff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.12);
+}
+
+.social-btn i {
+    font-size: 18px;
+}
+
+.google-btn i {
+    background: linear-gradient(45deg, #4285f4, #ea4335, #fbbc05, #34a853);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.apple-btn i {
+    color: #000;
+}
+
+.signup-link {
+    color: #718096;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+    color: #1976d2;
+}
+
+.messages {
+    margin-bottom: 20px;
+}
+
+.message {
+    background: #fed7d7;
+    color: #c53030;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #feb2b2;
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        padding: 30px 25px;
+        margin: 10px;
+        border-radius: 12px;
+    }
+    
+    .brand-name {
+        font-size: 24px;
+    }
+    
+    .welcome-text {
+        font-size: 14px;
+    }
+    
+    .form-group input {
+        padding: 14px 14px 14px 40px;
+        font-size: 16px;
+    }
+    
+    .social-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 15px;
+    }
+    
+    .login-card {
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+    
+    .checkmark-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .brand-name {
+        font-size: 22px;
+    }
+    
+    .form-group input {
+        padding: 12px 12px 12px 35px;
+        font-size: 16px;
+    }
+    
+    .input-icon {
+        font-size: 14px;
+        left: 12px;
+    }
+}
+
+/* Create Account Page Specific Styles */
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2196F3;
+    margin: 0 0 10px 0;
+}
+
+.social-login-top {
+    margin-bottom: 25px;
+}
+
+.social-login-top .social-buttons {
+    margin-bottom: 20px;
+}
+
+.social-login-top .divider {
+    margin: 20px 0;
+}
+
+.social-login-top .divider span {
+    font-size: 14px;
+    color: #a0aec0;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a0aec0;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #2196F3;
+}
+
+.terms-checkbox {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.terms-link {
+    color: #2196F3;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+    color: #1976d2;
+    text-decoration: underline;
+}
+
+.signin-btn i {
+    margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 22px;
+    }
+    
+    .social-login-top .social-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 20px;
+    }
+    
+    .terms-checkbox {
+        font-size: 13px;
     }
 }
