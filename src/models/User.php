@@ -1,19 +1,22 @@
 <?php
 
 class User {
+    private $username;
     private $email;
     private $password;
-    private $name;
-    private $surname;
+    
 
-    public function __construct(string $email, string $password, string $name, string $surname) {
+    public function __construct(string $username, string $email, string $password) {
+        $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        $this->name = $name;
-        $this->surname = $surname;
     }
 
     //Getters
+    public function getUsername(): string {
+        return $this->username;
+    }
+
     public function getEmail(): string {
         return $this->email;
     }
@@ -22,28 +25,16 @@ class User {
         return $this->password;
     }
 
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getSurname() {
-        return $this->surname;
-    }
-
     // Setters
+    public function setUsername($username) {
+        $this->username = $username;
+    }
+
     public function setEmail($email) {
         $this->email = $email;
     }
 
     public function setPassword($password) {
         $this->password = $password;
-    }
-
-    public function setName($name) {
-        $this->name = $name;
-    }
-
-    public function setSurname($surname) {
-        $this->surname = $surname;
     }
 }
