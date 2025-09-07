@@ -14,31 +14,38 @@
     </header>
     <main>
         <div class="container">
-            <h2>Add new task</h2>
-            <div class="form-group">
-                <label for="task-title">Task title</label>
-                <input type="text" id="task-title" placeholder="Enter the title of the task">
-            </div>
-            <div class="form-group">
-                <label for="task-desc">Description</label>
-                <textarea id="task-desc" placeholder="Enter a description of the task"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="task-date">Deadline</label>
-                <input type="date" id="task-date">
-            </div>
-            <div class="form-group">
-                <label>Priority</label>
-                <div class="priority-buttons">
-                    <button class="high priority-disabled">High</button>
-                    <button class="medium">Medium</button>
-                    <button class="low priority-disabled" disabled>Low</button>
+            <form method="POST" action="/addTask">
+                <h2>Add new task</h2>
+
+                <div class="form-group">
+                    <label for="task-title">Task title</label>
+                    <input type="text" id="task-title" name="title" placeholder="Enter the title of the task">
                 </div>
-            </div>
-            <div class="buttons">
-                <button class="delete">Delete</button>
-                <button class="save">Save</button>
-            </div>
+
+                <div class="form-group">
+                    <label for="task-desc">Description</label>
+                    <textarea id="task-desc" name="description" placeholder="Enter a description of the task"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="task-date">Deadline</label>
+                    <input type="date" id="task-date" name="deadline">
+                </div>
+
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority" name="priority" required>
+                        <option value="High">High</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+
+                <div class="buttons">
+                    <button type="reset" class="delete">Delete</button>
+                    <button type="submit" class="save">Save</button>
+                </div>
+            </form>
         </div>
     </main>
 </body>
