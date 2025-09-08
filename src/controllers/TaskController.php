@@ -13,6 +13,15 @@ class TaskController extends AppController {
         $this->taskRepository = new TaskRepository();
     }
 
+    public function tasks() {
+        $tasks = $this->taskRepository->getTasks();
+        $this->render('tasks', ['tasks' => $tasks]);
+    }
+
+    public function taskDetails() {
+        $this->render('taskDetails');
+    }
+
     public function addTask() {
         if ($this->isPost()) {
             $title = $_POST['title'];

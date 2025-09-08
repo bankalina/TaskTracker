@@ -6,13 +6,15 @@ class Task {
     private $deadline;
     private $priority;
     private $createdBy;
+    private $status;
 
-    public function __construct($title, $description, $deadline, $priority, $createdBy) {
+    public function __construct($title, $description, $deadline, $priority, $createdBy, $status) {
         $this->title = $title;
         $this->description = $description;
         $this->deadline = $deadline;
         $this->priority = $priority;
         $this->createdBy = $createdBy;
+        $this->status = $status;
     }
 
     public function getTitle() {
@@ -33,5 +35,9 @@ class Task {
 
     public function getCreatedBy() {
         return $this->createdBy;
+    }
+
+    public function getStatus() {
+        return $this->status;
     }
 }

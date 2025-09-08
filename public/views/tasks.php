@@ -22,24 +22,26 @@
     <main>
         <section class="tasks">
             <h2>My tasks</h2>
+            <?php foreach ($tasks as $task): ?>
             <div class="task">
-                <h3>New dashboard design</h3>
-                <p>Creating wireframes and mockups for the new interface.</p>
+                <h3><?= $task->getTitle(); ?></h3>
+                <p><?= $task->getDescription(); ?></p>
                 <span class="tag design">Design</span>
-                <span class="due">Today</span>
+                <span class="due"><?= $task->getDeadline(); ?></span>
             </div>
-            <div class="task">
-                <h3>API documentation update</h3>
-                <p>Review and update API documentation with new endpoints.</p>
-                <span class="tag development">Development</span>
-                <span class="due">Tomorrow</span>
-            </div>
-            <div class="task">
-                <h3>Content strategy review</h3>
-                <p>Review and approval of content strategy for Q1 2025.</p>
-                <span class="tag marketing">Marketing</span>
-                <span class="due">Next week</span>
-            </div>
+            <?php endforeach; ?>
+<!--            <div class="task">-->
+<!--                <h3>API documentation update</h3>-->
+<!--                <p>Review and update API documentation with new endpoints.</p>-->
+<!--                <span class="tag development">Development</span>-->
+<!--                <span class="due">Tomorrow</span>-->
+<!--            </div>-->
+<!--            <div class="task">-->
+<!--                <h3>Content strategy review</h3>-->
+<!--                <p>Review and approval of content strategy for Q1 2025.</p>-->
+<!--                <span class="tag marketing">Marketing</span>-->
+<!--                <span class="due">Next week</span>-->
+<!--            </div>-->
         </section>
     </main>
 </body>
