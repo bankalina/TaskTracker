@@ -11,10 +11,11 @@ if (empty($path)) {
 
 Routing::get('', 'DefaultController');
 Routing::get('index', 'DefaultController');
-Routing::get('addTask', 'DefaultController');
-Routing::get('taskDetails', 'DefaultController');
-Routing::get('tasks', 'DefaultController');
-Routing::post('createAccount', 'DefaultController');
+Routing::get('addTask', 'TaskController');
+Routing::get('taskDetails', 'TaskController');
+Routing::get('tasks', 'TaskController');
+Routing::get('createAccount', 'SecurityController');
+Routing::get('login', 'SecurityController');
 
 Routing::post('login', 'SecurityController');
 Routing::post('createAccount', 'SecurityController');

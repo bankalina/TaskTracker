@@ -19,7 +19,7 @@ class Routing {
         $action = explode("/", $url)[0];
 
         if(!array_key_exists($action, self::$routes)) {
-            die("Wrong url!");  //zatrzyma wykonanie interpretera
+            die("Wrong url!");
         }
 
         $controller = self::$routes[$action];
