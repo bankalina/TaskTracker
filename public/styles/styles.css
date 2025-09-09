@@ -29,18 +29,18 @@ header {
 }
 
 .low, .low:hover {
-    background-color: #cbe8964f;
-    color: #41ab24e2;
+    background-color: #4CAF50;
+    color: white;
 }
 
 .medium, .medium:hover {
-    background-color: #f9cb4e39;
-    color: #ffa200e1;
+    background-color: #FF9800;
+    color: white;
 }
 
 .high, .high:hover {
-    background-color: #e2342823;
-    color: #e23428dd;
+    background-color: #F44336;
+    color: white;
 }
 
 .delete {
@@ -79,10 +79,41 @@ header {
 
 	.task {
 		background: white;
-		padding: 15px;
-		margin-bottom: 10px;
+		padding: 20px;
+		margin-bottom: 15px;
 		border-radius: 12px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		border: 2px solid #e2e8f0;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.task::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: linear-gradient(135deg, #2196F3 0%, #9c27b0 100%);
+	}
+
+	.task:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+		border-color: #cbd5e0;
+	}
+
+	.task-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+
+	.task-link:hover {
+		text-decoration: none;
+		color: inherit;
 	}
 
 	.tag {
@@ -91,6 +122,33 @@ header {
 		border-radius: 12px;
 		color: white;
 		font-size: 12px;
+		font-weight: 600;
+	}
+
+	/* Priority tag styles */
+	.tag.high {
+		background-color: #F44336;
+		color: white;
+	}
+
+	.tag.medium {
+		background-color: #FF9800;
+		color: white;
+	}
+
+	.tag.low {
+		background-color: #4CAF50;
+		color: white;
+	}
+
+	.status-tag {
+		display: inline-block;
+		padding: 5px 10px;
+		border-radius: 12px;
+		color: white;
+		font-size: 12px;
+		font-weight: 600;
+		background-color: #6c757d;
 	}
 
 	.design {
@@ -120,6 +178,67 @@ header {
 		font-size: 12px;
 	}
 
+	.tasks-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+		width: 100%;
+	}
+
+	.tasks-header h2 {
+		margin: 0;
+		flex: 1;
+	}
+
+	.tasks-header .add-task-btn {
+		flex-shrink: 0 !important;
+		margin-left: 20px !important;
+		display: inline-flex !important;
+		position: relative !important;
+		background: red !important;
+		border: 5px solid blue !important;
+	}
+
+	.add-task-btn {
+		background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+		color: white;
+		padding: 12px 24px;
+		border-radius: 25px;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 14px;
+		transition: all 0.3s ease;
+		box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+		border: 2px solid transparent;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		white-space: nowrap;
+	}
+
+	.add-task-btn::before {
+		content: '+';
+		font-size: 18px;
+		font-weight: bold;
+		line-height: 1;
+	}
+
+	.add-task-btn:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+		background: linear-gradient(135deg, #45a049 0%, #4CAF50 100%);
+		border-color: rgba(255, 255, 255, 0.2);
+		color: white;
+	}
+
+	.add-task-btn:active {
+		transform: translateY(-1px);
+		box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+	}
+
 	a {
 		text-decoration: none;
 		color: black;
@@ -139,6 +258,19 @@ header {
 		nav ul {
 			flex-direction: column;
 			gap: 10px;
+		}
+		.tasks-header {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			gap: 10px;
+		}
+		.tasks-header h2 {
+			font-size: 18px;
+		}
+		.add-task-btn {
+			padding: 10px 20px;
+			font-size: 13px;
 		}
 	}
 }
