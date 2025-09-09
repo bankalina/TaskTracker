@@ -31,6 +31,12 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
+        // Start session and store user ID
+        session_start();
+        $_SESSION['user_id'] = $user->getId();
+        $_SESSION['user_email'] = $user->getEmail();
+        $_SESSION['user_username'] = $user->getUsername();
+
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/tasks");
     }
@@ -56,11 +62,17 @@ class SecurityController extends AppController
                 return $this->render('createAccount', ['messages' => ['Password must be at least 6 characters long!']]);
             }
 
-            // Tutaj docelowo będzie zapis do bazy danych
-            // Na razie przekierowujemy na stronę logowania z komunikatem o sukcesie
+            // TODO: Add user to database
             return $this->render('login', ['messages' => ['Account created successfully! Please log in.']]);
         }
 
         return $this->render('createAccount');
+    }
+
+    public function logout() {
+        session_start();
+        session_destroy();
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
     }
 }
