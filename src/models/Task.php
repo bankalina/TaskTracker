@@ -1,6 +1,7 @@
 <?php
 
 class Task {
+    private $id;
     private $title;
     private $description;
     private $deadline;
@@ -8,7 +9,8 @@ class Task {
     private $createdBy;
     private $status;
 
-    public function __construct($title, $description, $deadline, $priority, $createdBy, $status) {
+    public function __construct($id, $title, $description, $deadline, $priority, $createdBy, $status) {
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->deadline = $deadline;
@@ -17,20 +19,24 @@ class Task {
         $this->status = $status;
     }
 
-    public function getTitle() {
-        return $this->title;
-
+    public function getId() {
+        return $this->id;
     }
+
+    public function getTitle() {
+        return $this->title ?? '';
+    }
+    
     public function getDescription() {
-        return $this->description;
+        return $this->description ?? '';
     }
 
     public function getDeadline() {
-        return $this->deadline;
+        return $this->deadline ?? '';
     }
 
     public function getPriority() {
-        return $this->priority;
+        return $this->priority ?? 'Medium';
     }
 
     public function getCreatedBy() {
@@ -38,6 +44,6 @@ class Task {
     }
 
     public function getStatus() {
-        return $this->status;
+        return $this->status ?? 'To do';
     }
 }
