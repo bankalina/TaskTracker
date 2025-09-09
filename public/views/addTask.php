@@ -17,19 +17,27 @@
             <form method="POST" action="/addTask">
                 <h2>Add new task</h2>
 
+                <?php if (isset($messages)): ?>
+                    <div class="messages">
+                        <?php foreach ($messages as $message): ?>
+                            <div class="message error"><?= $message ?></div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="form-group">
                     <label for="task-title">Task title</label>
-                    <input type="text" id="task-title" name="title" placeholder="Enter the title of the task">
+                    <input type="text" id="task-title" name="title" placeholder="Enter the title of the task" required>
                 </div>
 
                 <div class="form-group">
                     <label for="task-desc">Description</label>
-                    <textarea id="task-desc" name="description" placeholder="Enter a description of the task"></textarea>
+                    <textarea id="task-desc" name="description" placeholder="Enter a description of the task" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="task-date">Deadline</label>
-                    <input type="date" id="task-date" name="deadline">
+                    <input type="date" id="task-date" name="deadline" required>
                 </div>
 
                 <div class="form-group">
