@@ -16,32 +16,39 @@
                 <li><a href="#">Dashboard</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Calendar</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section class="tasks">
-            <h2>My tasks</h2>
-            <?php foreach ($tasks as $task): ?>
-            <div class="task">
-                <h3><?= $task->getTitle(); ?></h3>
-                <p><?= $task->getDescription(); ?></p>
-                <span class="tag design">Design</span>
-                <span class="due"><?= $task->getDeadline(); ?></span>
+            <div class="tasks-header">
+                <h2>My tasks</h2>
             </div>
-            <?php endforeach; ?>
-<!--            <div class="task">-->
-<!--                <h3>API documentation update</h3>-->
-<!--                <p>Review and update API documentation with new endpoints.</p>-->
-<!--                <span class="tag development">Development</span>-->
-<!--                <span class="due">Tomorrow</span>-->
-<!--            </div>-->
-<!--            <div class="task">-->
-<!--                <h3>Content strategy review</h3>-->
-<!--                <p>Review and approval of content strategy for Q1 2025.</p>-->
-<!--                <span class="tag marketing">Marketing</span>-->
-<!--                <span class="due">Next week</span>-->
-<!--            </div>-->
+            <div style="text-align: right; margin-bottom: 20px;">
+                <a href="/addTask" class="add-task-btn">Add New Task</a>
+            </div>
+            <?php if (empty($tasks)): ?>
+                <div class="task">
+                    <h3>No tasks found</h3>
+                    <p>You don't have any tasks assigned yet. Create your first task!</p>
+                </div>
+            <?php else: ?>
+                <?php foreach ($tasks as $task): ?>
+                <a href="/taskDetails?id=<?= $task->getId(); ?>" class="task-link">
+                    <div class="task">
+                        <h3><?= htmlspecialchars($task->getTitle() ?? ''); ?></h3>
+                        <p><?= htmlspecialchars($task->getDescription() ?? ''); ?></p>
+                        <?php 
+                        $priority = $task->getPriority() ?? 'Medium';
+                        $priorityLower = strtolower($priority);
+                        ?>
+                        <span class="tag <?= $priorityLower ?>"><?= htmlspecialchars($priority); ?></span>
+                        <span class="due"><?= htmlspecialchars($task->getDeadline() ?? ''); ?></span>
+                    </div>
+                </a>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </section>
     </main>
 </body>

@@ -11,40 +11,61 @@
 <body class=taskDetails>
     <header>
         <h1>TaskTracker</h1>
+        <nav>
+            <ul>
+                <li><a href="/tasks">← Back to Tasks</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <div class="container">
-            <h2>Task details</h2>
-            <div class="form-group">
-                <label for="task-title">Task title</label>
-                <input type="text" id="task-title" value="Redesign Dashboard Interface">
-            </div>
-            <div class="form-group">
-                <label for="task-desc">Description</label>
-                <textarea id="task-desc">Redesign the main dashboard interface to improve user experience and incorporate new analytics features. Focus on modern design principles and ensure mobile responsiveness.</textarea>
-            </div>
-            <div class="form-group">
-                <label for="task-date">Deadline</label>
-                <input type="date" id="task-date" value="2025-01-15">
-            </div>
-            <div class="form-group">
-                <label>Priority</label>
-                <div class="priority-buttons">
-                    <button class="high priority-disabled">High</button>
-                    <button class="medium priority-disabled">Medium</button>
-                    <button class="low">Low</button>
+            <h2>Task Details</h2>
+            
+            <?php if (isset($messages)): ?>
+                <div class="messages">
+                    <?php foreach ($messages as $message): ?>
+                        <div class="message error"><?= $message ?></div>
+                    <?php endforeach; ?>
                 </div>
-            </div>
-            <div class="subtasks">
-                <h3>Subtasks</h3>
-                <label><input type="checkbox">Research current dashboard patterns</label>               
-                <label><input type="checkbox"> Create wireframes</label>
-                <label><input type="checkbox"> Design UI components</label>
-            </div>
-            <div class="buttons">
-                <button class="delete">Delete</button>
-                <button class="save">Save</button>
-            </div>
+            <?php endif; ?>
+
+            <?php if (isset($task)): ?>
+                <div class="form-group">
+                    <label for="task-title">Task Title</label>
+                    <input type="text" id="task-title" value="<?= htmlspecialchars($task->getTitle()); ?>" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="task-desc">Description</label>
+                    <textarea id="task-desc" readonly><?= htmlspecialchars($task->getDescription()); ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-date">Deadline</label>
+                    <input type="date" id="task-date" value="<?= htmlspecialchars($task->getDeadline()); ?>" readonly>
+                </div>
+                <div class="form-group">
+                    <label>Priority</label>
+                    <div class="priority-display">
+                        <?php 
+                        $priority = $task->getPriority() ?? 'Medium';
+                        $priorityLower = strtolower($priority);
+                        ?>
+                        <span class="tag <?= $priorityLower ?>"><?= htmlspecialchars($priority); ?></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="status-display">
+                        <span class="status-tag"><?= htmlspecialchars($task->getStatus()); ?></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Task ID</label>
+                    <input type="text" value="<?= htmlspecialchars($task->getId()); ?>" readonly>
+                </div>
+            <?php else: ?>
+                <div class="message error">Task not found.</div>
+            <?php endif; ?>
         </div>
     </main>
 </body>
