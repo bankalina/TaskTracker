@@ -24,32 +24,27 @@ class TaskController extends AppController {
     }
 
     public function taskDetails() {
-        // Check if user is logged in
         session_start();
         if (!isset($_SESSION['user_id'])) {
             return $this->render('login', ['messages' => ['Please log in to view task details.']]);
         }
 
-        // Get task ID from URL parameter
         $taskId = $_GET['id'] ?? null;
         if (!$taskId) {
             return $this->render('tasks', ['messages' => ['Task ID is required.']]);
         }
 
-        // Get task details
         $task = $this->taskRepository->getTask($taskId);
         if (!$task) {
             return $this->render('tasks', ['messages' => ['Task not found.']]);
         }
 
-        // Get subtasks for this task
         $subtasks = $this->taskRepository->getSubtasks($taskId);
 
         $this->render('taskDetails', ['task' => $task, 'subtasks' => $subtasks]);
     }
 
     public function addTask() {
-        // Check if user is logged in (for both GET and POST)
         session_start();
         if (!isset($_SESSION['user_id'])) {
             return $this->render('login', ['messages' => ['Please log in to add tasks.']]);
@@ -87,7 +82,6 @@ class TaskController extends AppController {
             return $this->render('login', ['messages' => ['Please log in to edit tasks.']]);
         }
 
-        // Get task ID from URL parameter
         $taskId = $_GET['id'] ?? null;
         if (!$taskId) {
             return $this->render('tasks', ['messages' => ['Task ID is required.']]);
@@ -106,7 +100,6 @@ class TaskController extends AppController {
             $priority = $_POST['priority'];
             $status = $_POST['status'];
             
-            // Get task_id from POST instead of GET
             $taskId = $_POST['task_id'] ?? $taskId;
 
             if (empty($title) || empty($description) || empty($deadline) || empty($priority) || empty($status)) {

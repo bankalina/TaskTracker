@@ -82,28 +82,22 @@
     </main>
     
     <script>
-        // Auto-resize textarea to fit content
         function autoResize(textarea) {
             textarea.style.height = 'auto';
             textarea.style.height = textarea.scrollHeight + 'px';
         }
 
-        // Priority button selection
         function selectPriority(priority) {
-            // Remove active class from all buttons
             document.querySelectorAll('.priority-btn').forEach(btn => {
                 btn.classList.add('priority-disabled');
             });
             
-            // Remove disabled class from selected button
             const selectedBtn = document.querySelector(`[data-priority="${priority}"]`);
             selectedBtn.classList.remove('priority-disabled');
-            
-            // Update hidden input
+          
             document.getElementById('priority-input').value = priority;
         }
 
-        // Apply auto-resize on page load
         document.addEventListener('DOMContentLoaded', function() {
             const textarea = document.getElementById('task-desc');
             if (textarea) {
@@ -114,7 +108,6 @@
             const currentPriority = document.getElementById('priority-input').value;
             selectPriority(currentPriority);
 
-            // Add click handlers to priority buttons
             document.querySelectorAll('.priority-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     selectPriority(this.dataset.priority);

@@ -13,7 +13,9 @@
         <h1>TaskTracker</h1>
         <nav>
             <ul>
-                <li><a href="/tasks">← Back to Tasks</a></li>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="#">Calendar</a></li>
+                <li><a href="#">Reports</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
@@ -37,7 +39,7 @@
                 </div>
                 <div class="form-group">
                     <label for="task-desc">Description</label>
-                    <textarea id="task-desc" readonly><?= htmlspecialchars($task->getDescription()); ?></textarea>
+                    <textarea id="task-desc" readonly class="auto-resize"><?= htmlspecialchars($task->getDescription()); ?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="task-date">Deadline</label>
@@ -45,12 +47,15 @@
                 </div>
                 <div class="form-group">
                     <label>Priority</label>
-                    <div class="priority-display">
+                    <div class="priority-buttons">
                         <?php 
                         $priority = $task->getPriority() ?? 'Medium';
-                        $priorityLower = strtolower($priority);
+                        $priorities = ['High', 'Medium', 'Low'];
+                        foreach ($priorities as $p): 
+                            $isActive = ($p === $priority) ? '' : 'priority-disabled';
                         ?>
-                        <span class="tag <?= $priorityLower ?>"><?= htmlspecialchars($priority); ?></span>
+                        <button class="<?= strtolower($p) ?> <?= $isActive ?>"><?= $p ?></button>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -59,15 +64,54 @@
                         <span class="status-tag"><?= htmlspecialchars($task->getStatus()); ?></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Task ID</label>
-                    <input type="text" value="<?= htmlspecialchars($task->getId()); ?>" readonly>
-                </div>
-            <?php else: ?>
-                <div class="message error">Task not found.</div>
-            <?php endif; ?>
+                    <div class="buttons">
+                        <a href="/editTask?id=<?= $task->getId(); ?>" class="edit-btn">Edit Task</a>
+                    </div>
+                    
+                    <?php if (isset($subtasks) && !empty($subtasks)): ?>
+                        <div class="subtasks-section">
+                            <h3>Subtasks</h3>
+                            <div class="subtasks-list">
+                                <?php foreach ($subtasks as $subtask): ?>
+                                    <div class="subtask-item">
+                                        <div class="subtask-content">
+                                            <h4><?= htmlspecialchars($subtask['title'] ?? ''); ?></h4>
+                                            <?php if (!empty($subtask['description'])): ?>
+                                                <p><?= htmlspecialchars($subtask['description']); ?></p>
+                                            <?php endif; ?>
+                                            <div class="subtask-meta">
+                                                <?php if (!empty($subtask['status'])): ?>
+                                                    <span class="subtask-status">Status: <?= htmlspecialchars($subtask['status']); ?></span>
+                                                <?php endif; ?>
+                                                <?php if (!empty($subtask['created_at'])): ?>
+                                                    <span class="subtask-date">Created: <?= date('Y-m-d', strtotime($subtask['created_at'])); ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <div class="message error">Task not found.</div>
+                <?php endif; ?>
         </div>
     </main>
+    
+    <script>
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('task-desc');
+            if (textarea) {
+                autoResize(textarea);
+            }
+        });
+    </script>
 </body>
 
 </html>
