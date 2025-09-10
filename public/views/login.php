@@ -27,7 +27,12 @@
                 <div class="messages">
                     <?php if(isset($messages)) {
                         foreach ($messages as $message) {
-                            echo '<div class="message">' . $message . '</div>';
+                            echo '<div class="message error">' . $message . '</div>';
+                        }
+                    }?>
+                    <?php if(isset($success_messages)) {
+                        foreach ($success_messages as $message) {
+                            echo '<div class="message success">' . $message . '</div>';
                         }
                     }?>
                 </div>
@@ -60,27 +65,12 @@
                 <button type="submit" class="signin-btn">Sign In</button>
             </form>
 
-            <!-- <div class="social-login">
-                <div class="divider">
-                    <span>Or continue with</span>
-                </div>
-                <div class="social-buttons">
-                    <button type="button" class="social-btn google-btn">
-                        <i class="fab fa-google"></i>
-                        <span>Google</span>
-                    </button>
-                    <button type="button" class="social-btn apple-btn">
-                        <i class="fab fa-apple"></i>
-                        <span>Apple</span>
-                    </button>
-                </div>
-            </div> -->
-
             <div class="signup-link">
                 <p>Don't have an account? <a href="createAccount">Sign up</a></p>
             </div>
         </div>
     </div>
+    <script src="public/js/script.js"></script>
 </body>
 
 </html>

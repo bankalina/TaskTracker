@@ -23,33 +23,22 @@
                 <p class="welcome-text">Start managing your tasks efficiently</p>
             </div>
 
-            <!-- <div class="social-login-top">
-                <div class="social-buttons">
-                    <button type="button" class="social-btn google-btn">
-                        <i class="fab fa-google"></i>
-                        <span>Continue with Google</span>
-                    </button>
-                    <button type="button" class="social-btn apple-btn">
-                        <i class="fab fa-apple"></i>
-                        <span>Continue with Apple</span>
-                    </button>
-                </div>
-                <div class="divider">
-                    <span>or</span>
-                </div>
-            </div> -->
-
             <form class="login-form" action="createAccount" method="POST">
                 <div class="messages">
                     <?php if(isset($messages)) {
                         foreach ($messages as $message) {
-                            echo '<div class="message">' . $message . '</div>';
+                            echo '<div class="message error">' . $message . '</div>';
+                        }
+                    }?>
+                    <?php if(isset($success_messages)) {
+                        foreach ($success_messages as $message) {
+                            echo '<div class="message success">' . $message . '</div>';
                         }
                     }?>
                 </div>
 
                 <div class="form-group">
-                    <label for="fullname">Full Name</label>
+                    <label for="fullname">Username</label>
                     <div class="input-wrapper">
                         <i class="fas fa-user input-icon"></i>
                         <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
@@ -89,12 +78,10 @@
 
                 <div class="form-group">
                     <label class="checkbox-wrapper terms-checkbox">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <span class="checkmark"></span>
-                        I agree to the
+                        By clicking the Create Account button, you agree to our
                         <a href="#" class="terms-link">Terms of Service</a>
                         and
-                        <a href="#" class="terms-link">Privacy Policy</a>
+                        <a href="#" class="terms-link">Privacy Policy.</a>
                     </label>
                 </div>
 
@@ -110,22 +97,7 @@
         </div>
     </div>
 
-    <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const icon = input.nextElementSibling.querySelector('i');
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-    </script>
+    <script src="public/js/script.js"></script>
 </body>
 
 </html>

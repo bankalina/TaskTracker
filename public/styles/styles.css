@@ -964,13 +964,23 @@ header nav ul li a:hover {
 }
 
 .message {
-    background: #fed7d7;
-    color: #c53030;
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 10px;
     font-size: 14px;
+    font-weight: 500;
+}
+
+.message.error {
+    background: #fed7d7;
+    color: #c53030;
     border: 1px solid #feb2b2;
+}
+
+.message.success {
+    background: #c6f6d5;
+    color: #22543d;
+    border: 1px solid #9ae6b4;
 }
 
 @media (max-width: 768px) {
@@ -1110,6 +1120,17 @@ header nav ul li a:hover {
         flex-direction: column;
         gap: 12px;
     }
+}
+
+/* Form validation styles */
+.no-valid {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+}
+
+.no-valid:focus {
+    border-color: #e74c3c !important;
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3) !important;
 }
 
 @media (max-width: 480px) {
