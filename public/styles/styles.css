@@ -21,6 +21,81 @@ header {
     border-radius: 0 0 12px 12px;
 }
 
+/* Navigation styles */
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+}
+
+header nav ul li a {
+    color: white !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease !important;
+    display: inline-block !important;
+    background: linear-gradient(135deg, #0f78e9 0%, #1976d2 100%) !important;
+    box-shadow: 0 2px 8px rgba(15, 120, 233, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    text-transform: uppercase !important;
+    font-size: 12px !important;
+    letter-spacing: 0.5px !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+header nav ul li a:hover {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%) !important;
+    color: white !important;
+    text-decoration: none !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(15, 120, 233, 0.4) !important;
+}
+
+/* Edit Task button styles - blue color, normal shape */
+.edit-btn {
+    background: linear-gradient(135deg, #2196F3 0%, #1976d2 100%) !important;
+    color: white !important;
+    padding: 12px 32px !important;
+    border-radius: 25px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3) !important;
+    border: 2px solid transparent !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    cursor: pointer !important;
+}
+
+.edit-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4) !important;
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.edit-btn:active {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3) !important;
+}
+
+
 .low, .medium, .high, .delete, .save {
     color: white;
     font-weight: bold;
@@ -29,18 +104,18 @@ header {
 }
 
 .low, .low:hover {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #cbe8964f;
+    color: #41ab24e2;
 }
 
 .medium, .medium:hover {
-    background-color: #FF9800;
-    color: white;
+    background-color: #f9cb4e39;
+    color: #ffa200e1;
 }
 
 .high, .high:hover {
-    background-color: #F44336;
-    color: white;
+    background-color: #e2342823;
+    color: #e23428dd;
 }
 
 .delete {
@@ -127,18 +202,18 @@ header {
 
 	/* Priority tag styles */
 	.tag.high {
-		background-color: #F44336;
-		color: white;
+		background-color: #e2342823;
+		color: #e23428dd;
 	}
 
 	.tag.medium {
-		background-color: #FF9800;
-		color: white;
+		background-color: #f9cb4e39;
+		color: #ffa200e1;
 	}
 
 	.tag.low {
-		background-color: #4CAF50;
-		color: white;
+		background-color: #cbe8964f;
+		color: #41ab24e2;
 	}
 
 	.status-tag {
@@ -150,6 +225,112 @@ header {
 		font-weight: 600;
 		background-color: #6c757d;
 	}
+
+	.auto-resize {
+		resize: none;
+		overflow: hidden;
+		min-height: 60px;
+		height: auto;
+	}
+
+	.auto-resize:focus {
+		outline: none;
+	}
+
+	/* Priority buttons in taskDetails */
+	.taskDetails .priority-buttons button {
+		cursor: default;
+		pointer-events: none;
+	}
+
+	.taskDetails .priority-buttons button:hover {
+		transform: none;
+		box-shadow: none;
+	}
+
+
+	/* Edit Task page styles - make priority buttons clickable */
+	.taskDetails .priority-btn {
+		cursor: pointer;
+		pointer-events: auto;
+	}
+
+	.taskDetails .priority-btn:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	}
+
+
+
+/* Cancel button styles */
+.cancel-btn {
+	background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%) !important;
+	color: white !important;
+	padding: 12px 32px !important;
+	border-radius: 50% !important;
+	text-decoration: none !important;
+	font-weight: 700 !important;
+	font-size: 14px !important;
+	transition: all 0.3s ease !important;
+	box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3) !important;
+	border: 2px solid transparent !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 8px !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+	white-space: nowrap !important;
+	cursor: pointer !important;
+}
+
+.cancel-btn:hover {
+	transform: translateY(-3px) !important;
+	box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4) !important;
+	background: linear-gradient(135deg, #5a6268 0%, #495057 100%) !important;
+	border-color: rgba(255, 255, 255, 0.2) !important;
+	color: white !important;
+	text-decoration: none !important;
+}
+
+.cancel-btn:active {
+	transform: translateY(-1px) !important;
+	box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3) !important;
+}
+
+/* Save button styles for editTask page */
+.save {
+	background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%) !important;
+	color: white !important;
+	padding: 12px 32px !important;
+	border-radius: 50% !important;
+	text-decoration: none !important;
+	font-weight: 700 !important;
+	font-size: 14px !important;
+	transition: all 0.3s ease !important;
+	box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3) !important;
+	border: 2px solid transparent !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 8px !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+	white-space: nowrap !important;
+	cursor: pointer !important;
+}
+
+.save:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+	background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+	border-color: rgba(255, 255, 255, 0.2);
+	color: white;
+	text-decoration: none;
+}
+
+.save:active {
+	transform: translateY(-1px);
+	box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
 
 	.design {
 		background: #6a5acd;
@@ -384,6 +565,76 @@ header {
     .subtasks h3 {
         grid-column: 1 / -1;
         margin-bottom: 10px;
+    }
+
+    /* Subtasks section styles */
+    .subtasks-section {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 2px solid #e0e0e0;
+    }
+
+    .subtasks-section h3 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .subtasks-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .subtask-item {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .subtask-item:hover {
+        background: #e9ecef;
+        border-color: #dee2e6;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtask-content h4 {
+        margin: 0 0 8px 0;
+        color: #495057;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .subtask-content p {
+        margin: 0 0 10px 0;
+        color: #6c757d;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .subtask-meta {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .subtask-status {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .subtask-date {
+        color: #6c757d;
+        font-size: 12px;
+        font-style: italic;
     }
     
     .subtasks label {
