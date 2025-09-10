@@ -13,9 +13,9 @@
         <h1>TaskTracker</h1>
         <nav>
             <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Projects</a></li>
+                <li><a href="/tasks">Tasks</a></li>
                 <li><a href="#">Calendar</a></li>
+                <li><a href="#">Reports</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>

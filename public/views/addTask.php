@@ -11,6 +11,14 @@
 <body class="addTask">
     <header>
         <h1>TaskTracker</h1>
+        <nav>
+            <ul>
+                <li><a href="/tasks">Tasks</a></li>
+                <li><a href="#">Calendar</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <div class="container">
