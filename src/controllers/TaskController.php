@@ -20,12 +20,6 @@ class TaskController extends AppController {
         }
 
         $tasks = $this->taskRepository->getUserTasks($_SESSION['user_id']);
-        
-        error_log("Tasks count: " . count($tasks));
-        if (!empty($tasks)) {
-            error_log("First task priority: " . $tasks[0]->getPriority());
-        }
-        
         $this->render('tasks', ['tasks' => $tasks]);
     }
 
@@ -48,7 +42,10 @@ class TaskController extends AppController {
             return $this->render('tasks', ['messages' => ['Task not found.']]);
         }
 
-        $this->render('taskDetails', ['task' => $task]);
+        // Get subtasks for this task
+        $subtasks = $this->taskRepository->getSubtasks($taskId);
+
+        $this->render('taskDetails', ['task' => $task, 'subtasks' => $subtasks]);
     }
 
     public function addTask() {
@@ -82,5 +79,56 @@ class TaskController extends AppController {
         }
 
         return $this->render('addTask');
+    }
+
+    public function editTask() {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            return $this->render('login', ['messages' => ['Please log in to edit tasks.']]);
+        }
+
+        // Get task ID from URL parameter
+        $taskId = $_GET['id'] ?? null;
+        if (!$taskId) {
+            return $this->render('tasks', ['messages' => ['Task ID is required.']]);
+        }
+
+        $task = $this->taskRepository->getTask($taskId);
+        if (!$task) {
+            return $this->render('tasks', ['messages' => ['Task not found.']]);
+        }
+
+        if ($this->isPost()) {
+            
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $deadline = $_POST['deadline'];
+            $priority = $_POST['priority'];
+            $status = $_POST['status'];
+            
+            // Get task_id from POST instead of GET
+            $taskId = $_POST['task_id'] ?? $taskId;
+
+            if (empty($title) || empty($description) || empty($deadline) || empty($priority) || empty($status)) {
+                return $this->render('editTask', ['task' => $task, 'messages' => ['All fields are required!']]);
+            }
+
+            // Validate priority and status against ENUM values
+            if (!TaskRepository::isValidPriority($priority)) {
+                return $this->render('editTask', ['task' => $task, 'messages' => ['Invalid priority value!']]);
+            }
+
+            if (!TaskRepository::isValidStatus($status)) {
+                return $this->render('editTask', ['task' => $task, 'messages' => ['Invalid status value!']]);
+            }
+
+            $this->taskRepository->updateTask($taskId, $title, $description, $deadline, $priority, $status);
+
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/taskDetails?id={$taskId}");
+            exit();
+        }
+
+        return $this->render('editTask', ['task' => $task]);
     }
 }

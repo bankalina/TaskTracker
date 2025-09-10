@@ -40,7 +40,7 @@ class TaskRepository extends Repository {
 
         $stmt->execute();
         
-        // Trigger in database automatically adds entry to user_tasks table
+        // Trigger in database automatically adds record to user_tasks table
     }
 
     public function getTask($id)
@@ -175,7 +175,6 @@ class TaskRepository extends Repository {
         return in_array($status, [self::STATUS_TODO, self::STATUS_IN_PROGRESS, self::STATUS_DONE]);
     }
 
-    // Get all available ENUM values
     public static function getAvailableRoles() {
         return [self::ROLE_OWNER, self::ROLE_VIEWER, self::ROLE_ASSIGNED];
     }
@@ -186,5 +185,35 @@ class TaskRepository extends Repository {
 
     public static function getAvailableStatuses() {
         return [self::STATUS_TODO, self::STATUS_IN_PROGRESS, self::STATUS_DONE];
+    }
+
+    public function updateTask($taskId, $title, $description, $deadline, $priority, $status) {
+        $stmt = $this->database->connect()->prepare('
+            UPDATE tasks 
+            SET title = :title, description = :description, deadline = :deadline, 
+                priority = :priority, status = :status, updated_at = CURRENT_TIMESTAMP
+            WHERE id = :task_id
+        ');
+
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':deadline', $deadline);
+        $stmt->bindParam(':priority', $priority);
+        $stmt->bindParam(':status', $status);
+        $stmt->bindParam(':task_id', $taskId, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    public function getSubtasks($taskId) {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM subtasks 
+            WHERE id_task = :task_id 
+            ORDER BY created_at ASC
+        ');
+        $stmt->bindParam(':task_id', $taskId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
