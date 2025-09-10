@@ -5,16 +5,17 @@ class User {
     private $username;
     private $email;
     private $password;
+    private $salt;
     
 
-    public function __construct($id, string $username, string $email, string $password) {
+    public function __construct($id, string $username, string $email, string $password, $salt = null) {
         $this->id = $id;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->salt = $salt;
     }
 
-    //Getters
     public function getId() {
         return $this->id;
     }
@@ -31,7 +32,10 @@ class User {
         return $this->password;
     }
 
-    // Setters
+    public function getSalt() {
+        return $this->salt;
+    }
+
     public function setUsername($username) {
         $this->username = $username;
     }

@@ -27,11 +27,11 @@ class SecurityController extends AppController
             return $this->render('login', ['messages' => ['User with this email not exist!']]);
         }
 
-        if ($user->getPassword() !== $password) {
+        $hashedPassword = hash('sha256', $password . $user->getSalt());
+        if ($user->getPassword() !== $hashedPassword) {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
 
-        // Start session and store user ID
         session_start();
         $_SESSION['user_id'] = $user->getId();
         $_SESSION['user_email'] = $user->getEmail();
@@ -49,7 +49,6 @@ class SecurityController extends AppController
             $password = $_POST["password"];
             $confirmPassword = $_POST["confirmPassword"];
 
-            // Podstawowa walidacja
             if (empty($fullname) || empty($email) || empty($password)) {
                 return $this->render('createAccount', ['messages' => ['All fields are required!']]);
             }
@@ -62,8 +61,19 @@ class SecurityController extends AppController
                 return $this->render('createAccount', ['messages' => ['Password must be at least 6 characters long!']]);
             }
 
-            // TODO: Add user to database
-            return $this->render('login', ['messages' => ['Account created successfully! Please log in.']]);
+            $userRepository = new UserRepository();
+            
+            if ($userRepository->getUser($email)) {
+                return $this->render('createAccount', ['messages' => ['User with this email already exists!']]);
+            }
+          
+            $result = $userRepository->addUser($fullname, $email, $password);
+            
+            if ($result['success']) {
+                return $this->render('login', ['success_messages' => ['Account created successfully! Please log in.']]);
+            } else {
+                return $this->render('createAccount', ['messages' => [$result['message']]]);
+            }
         }
 
         return $this->render('createAccount');
