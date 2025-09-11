@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="public/styles/styles.css">
 </head>
 
-<body class="taskDetails">
+<body class="editTask">
     <header>
         <h1>TaskTracker</h1>
         <nav>
@@ -55,9 +55,9 @@
                             $priority = $task->getPriority() ?? 'Medium';
                             $priorities = ['High', 'Medium', 'Low'];
                             foreach ($priorities as $p): 
-                                $isActive = ($p === $priority) ? '' : 'priority-disabled';
+                                $isActive = ($p === $priority) ? 'active' : '';
                             ?>
-                            <button type="button" class="<?= strtolower($p) ?> <?= $isActive ?> priority-btn" data-priority="<?= $p ?>"><?= $p ?></button>
+                            <button type="button" class="priority-btn tag--<?= strtolower($p) ?> <?= $isActive ?>" data-priority="<?= $p ?>"><?= $p ?></button>
                             <?php endforeach; ?>
                             <input type="hidden" name="priority" id="priority-input" value="<?= htmlspecialchars($priority); ?>">
                         </div>
@@ -92,11 +92,13 @@
 
         function selectPriority(priority) {
             document.querySelectorAll('.priority-btn').forEach(btn => {
-                btn.classList.add('priority-disabled');
+                btn.classList.remove('active');
             });
             
             const selectedBtn = document.querySelector(`[data-priority="${priority}"]`);
-            selectedBtn.classList.remove('priority-disabled');
+            if (selectedBtn) {
+                selectedBtn.classList.add('active');
+            }
           
             document.getElementById('priority-input').value = priority;
         }

@@ -11,7 +11,7 @@
 
 <body class="login-page">
     <div class="login-container">
-        <div class="login-card">
+        <div class="login-content">
 
             <div class="login-header">
                 <div class="logo">
