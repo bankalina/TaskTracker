@@ -106,6 +106,8 @@ class TaskController extends AppController {
             return $this->render('tasks', ['messages' => ['Task not found.']]);
         }
 
+        $permissions = PermissionChecker::getUserPermissions($_SESSION['user_id'], $taskId);
+
         if ($this->isPost()) {
             
             $title = $_POST['title'];
@@ -117,16 +119,16 @@ class TaskController extends AppController {
             $taskId = $_POST['task_id'] ?? $taskId;
 
             if (empty($title) || empty($description) || empty($deadline) || empty($priority) || empty($status)) {
-                return $this->render('editTask', ['task' => $task, 'messages' => ['All fields are required!']]);
+                return $this->render('editTask', ['task' => $task, 'messages' => ['All fields are required!'], 'userRole' => $permissions['role']]);
             }
 
             // Validate priority and status against ENUM values
             if (!TaskRepository::isValidPriority($priority)) {
-                return $this->render('editTask', ['task' => $task, 'messages' => ['Invalid priority value!']]);
+                return $this->render('editTask', ['task' => $task, 'messages' => ['Invalid priority value!'], 'userRole' => $permissions['role']]);
             }
 
             if (!TaskRepository::isValidStatus($status)) {
-                return $this->render('editTask', ['task' => $task, 'messages' => ['Invalid status value!']]);
+                return $this->render('editTask', ['task' => $task, 'messages' => ['Invalid status value!'], 'userRole' => $permissions['role']]);
             }
 
             $this->taskRepository->updateTask($taskId, $title, $description, $deadline, $priority, $status);
@@ -136,7 +138,7 @@ class TaskController extends AppController {
             exit();
         }
 
-        return $this->render('editTask', ['task' => $task]);
+        return $this->render('editTask', ['task' => $task, 'userRole' => $permissions['role']]);
     }
 
     public function deleteTask() {

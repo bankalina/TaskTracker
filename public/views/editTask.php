@@ -73,6 +73,9 @@
                     <div class="buttons">
                         <button type="button" class="cancel-btn" onclick="window.location.href='/taskDetails?id=<?= $task->getId(); ?>'">Cancel</button>
                         <button type="submit" class="save">Save Changes</button>
+                        <?php if (isset($userRole) && $userRole === 'Owner'): ?>
+                        <button type="button" class="delete" onclick="confirmDelete(<?= $task->getId(); ?>)">Delete</button>
+                        <?php endif; ?>
                     </div>
                 </form>
             <?php else: ?>
@@ -96,6 +99,23 @@
             selectedBtn.classList.remove('priority-disabled');
           
             document.getElementById('priority-input').value = priority;
+        }
+
+        function confirmDelete(taskId) {
+            if (confirm('Are you sure you want to delete this task? This action cannot be undone.')) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/deleteTask';
+                
+                const taskIdInput = document.createElement('input');
+                taskIdInput.type = 'hidden';
+                taskIdInput.name = 'task_id';
+                taskIdInput.value = taskId;
+                
+                form.appendChild(taskIdInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {

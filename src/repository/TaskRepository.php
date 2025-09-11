@@ -229,4 +229,18 @@ class TaskRepository extends Repository {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result['role'] : null;
     }
+
+    public function deleteTask($taskId) {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                DELETE FROM tasks WHERE id = :task_id
+            ');
+            $stmt->bindParam(':task_id', $taskId, PDO::PARAM_INT);
+            
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Error deleting task: " . $e->getMessage());
+            return false;
+        }
+    }
 }
