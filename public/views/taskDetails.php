@@ -20,6 +20,15 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Display error messages -->
+    <?php if (isset($messages) && !empty($messages)): ?>
+        <div class="message error">
+            <?php foreach ($messages as $message): ?>
+                <p><?= htmlspecialchars($message); ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
     <main>
         <div class="container">
             <h2>Task Details</h2>
@@ -65,7 +74,11 @@
                     </div>
                 </div>
                     <div class="buttons">
-                        <a href="/editTask?id=<?= $task->getId(); ?>" class="edit-btn">Edit Task</a>
+                        <?php if (isset($canEdit) && $canEdit): ?>
+                            <a href="/editTask?id=<?= $task->getId(); ?>" class="edit-btn">Edit Task</a>
+                        <?php else: ?>
+                            <button type="button" class="edit-btn" onclick="showEditPermissionMessage()">Edit Task</button>
+                        <?php endif; ?>
                     </div>
                     
                     <?php if (isset($subtasks) && !empty($subtasks)): ?>
@@ -111,6 +124,10 @@
         function autoResize(textarea) {
             textarea.style.height = 'auto';
             textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        function showEditPermissionMessage() {
+            alert('You do not have permission to edit this task. Only Owners and Assigned users can edit tasks.');
         }
 
         document.addEventListener('DOMContentLoaded', function() {

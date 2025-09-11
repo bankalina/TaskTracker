@@ -47,12 +47,20 @@ class TaskController extends AppController {
         // Get user permissions for this task
         $permissions = PermissionChecker::getUserPermissions($_SESSION['user_id'], $taskId);
 
+        // Check for error messages from URL parameters
+        $errorMessage = $_GET['error'] ?? null;
+        $messages = [];
+        if ($errorMessage) {
+            $messages[] = $errorMessage;
+        }
+
         $this->render('taskDetails', [
             'task' => $task, 
             'subtasks' => $subtasks,
             'userRole' => $permissions['role'],
             'canEdit' => $permissions['canEdit'],
-            'canDelete' => $permissions['canDelete']
+            'canDelete' => $permissions['canDelete'],
+            'messages' => $messages
         ]);
     }
 
@@ -97,6 +105,14 @@ class TaskController extends AppController {
         $taskId = $_GET['id'] ?? null;
         if (!$taskId) {
             return $this->render('tasks', ['messages' => ['Task ID is required.']]);
+        }
+
+        // Check if user has edit permission
+        if (!PermissionChecker::canEditTask($_SESSION['user_id'], $taskId)) {
+            // Redirect back to task details with error message
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/taskDetails?id={$taskId}&error=You do not have permission to edit this task. Only Owners and Assigned users can edit tasks.");
+            exit();
         }
 
         PermissionChecker::requirePermission('edit_task', $_SESSION['user_id'], $taskId);
