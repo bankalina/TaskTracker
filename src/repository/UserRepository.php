@@ -45,9 +45,9 @@ class UserRepository extends Repository
             $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
             $stmt->bindParam(':salt', $salt, PDO::PARAM_STR);
             
-            // Set enabled to 0 (false) by default
-            $enabled = 0;
-            $stmt->bindParam(':enabled', $enabled, PDO::PARAM_INT);
+            // Set enabled to false by default
+            $enabled = false;
+            $stmt->bindParam(':enabled', $enabled, PDO::PARAM_BOOL);
             
             $result = $stmt->execute();
             

@@ -21,7 +21,7 @@ class TaskRepository extends Repository {
     public function addTask(Task $task) {
         $stmt = $this->database->connect()->prepare('
             INSERT INTO tasks (title, description, deadline, priority, id_assigned_by, status)
-            VALUES (:title, :description, :deadline, :priority, :created_by, :status)
+            VALUES (:title, :description, :deadline, :priority, :id_assigned_by, :status)
         ');
 
         $title = $task->getTitle();
@@ -35,7 +35,7 @@ class TaskRepository extends Repository {
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':deadline', $deadline);
         $stmt->bindParam(':priority', $priority);
-        $stmt->bindParam(':created_by', $created_by);
+        $stmt->bindParam(':id_assigned_by', $created_by);
         $stmt->bindParam(':status', $status);
 
         $stmt->execute();
