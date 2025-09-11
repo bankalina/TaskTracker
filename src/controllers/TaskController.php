@@ -3,6 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/Task.php';
 require_once __DIR__.'/../repository/TaskRepository.php';
+require_once __DIR__.'/../utils/PermissionChecker.php';
 
 class TaskController extends AppController {
 
@@ -34,14 +35,25 @@ class TaskController extends AppController {
             return $this->render('tasks', ['messages' => ['Task ID is required.']]);
         }
 
+        PermissionChecker::requirePermission('view_task', $_SESSION['user_id'], $taskId);
+
         $task = $this->taskRepository->getTask($taskId);
         if (!$task) {
             return $this->render('tasks', ['messages' => ['Task not found.']]);
         }
 
         $subtasks = $this->taskRepository->getSubtasks($taskId);
+        
+        // Get user permissions for this task
+        $permissions = PermissionChecker::getUserPermissions($_SESSION['user_id'], $taskId);
 
-        $this->render('taskDetails', ['task' => $task, 'subtasks' => $subtasks]);
+        $this->render('taskDetails', [
+            'task' => $task, 
+            'subtasks' => $subtasks,
+            'userRole' => $permissions['role'],
+            'canEdit' => $permissions['canEdit'],
+            'canDelete' => $permissions['canDelete']
+        ]);
     }
 
     public function addTask() {
@@ -87,6 +99,8 @@ class TaskController extends AppController {
             return $this->render('tasks', ['messages' => ['Task ID is required.']]);
         }
 
+        PermissionChecker::requirePermission('edit_task', $_SESSION['user_id'], $taskId);
+
         $task = $this->taskRepository->getTask($taskId);
         if (!$task) {
             return $this->render('tasks', ['messages' => ['Task not found.']]);
@@ -123,5 +137,34 @@ class TaskController extends AppController {
         }
 
         return $this->render('editTask', ['task' => $task]);
+    }
+
+    public function deleteTask() {
+        session_start();
+        if (!isset($_SESSION['user_id'])) {
+            return $this->render('login', ['messages' => ['Please log in to delete tasks.']]);
+        }
+
+        if (!$this->isPost()) {
+            header('Location: /tasks');
+            exit();
+        }
+
+        $taskId = $_POST['task_id'] ?? null;
+        if (!$taskId) {
+            return $this->render('tasks', ['messages' => ['Task ID is required.']]);
+        }
+
+        PermissionChecker::requirePermission('delete_task', $_SESSION['user_id'], $taskId);
+
+        $result = $this->taskRepository->deleteTask($taskId);
+        
+        if ($result) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/tasks?message=Task deleted successfully");
+            exit();
+        } else {
+            return $this->render('tasks', ['messages' => ['Failed to delete task.']]);
+        }
     }
 }

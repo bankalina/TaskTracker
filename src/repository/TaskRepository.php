@@ -216,4 +216,17 @@ class TaskRepository extends Repository {
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getUserRoleForTask($userId, $taskId) {
+        $stmt = $this->database->connect()->prepare('
+            SELECT role FROM user_tasks 
+            WHERE id_user = :user_id AND id_task = :task_id
+        ');
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':task_id', $taskId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['role'] : null;
+    }
 }

@@ -22,6 +22,7 @@ Routing::post('login', 'SecurityController');
 Routing::post('createAccount', 'SecurityController');
 Routing::post('addTask', 'TaskController');
 Routing::post('editTask', 'TaskController');
+Routing::post('deleteTask', 'TaskController');
 Routing::get('logout', 'SecurityController');
 
 Routing::run($path);

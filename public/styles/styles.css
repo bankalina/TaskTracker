@@ -1142,3 +1142,26 @@ header nav ul li a:hover {
         font-size: 13px;
     }
 }
+
+/* User Role Information Styles */
+.user-role-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+    font-size: 14px;
+}
+
+.role-badge {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid #bbdefb;
+}

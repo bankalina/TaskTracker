@@ -93,6 +93,14 @@
                             </div>
                         </div>
                     <?php endif; ?>
+                    
+                    <!-- User Role Information -->
+                    <?php if (isset($userRole)): ?>
+                    <div class="user-role-info">
+                        <strong>Your role for this task:</strong> 
+                        <span class="role-badge"><?= htmlspecialchars($userRole); ?></span>
+                    </div>
+                    <?php endif; ?>
                 <?php else: ?>
                     <div class="message error">Task not found.</div>
                 <?php endif; ?>
